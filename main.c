@@ -24,7 +24,7 @@ Liste dynamique pour un répertoire
 fichiers : pointeur vers un tableau d'entités de repertoire
 chemin : string du chemin du repertoire
 capacité : nombre d'entités contenu dans le repertoire
- * test
+ * test jordan lol
 */
 struct listeFichiers {
     dirent** fichiers;
@@ -65,7 +65,7 @@ int main(int argc, char** argv) {
 
 
 /*
-Demande une liste vide et le chemin d'un répertoire lol
+Demande une liste vide et le chemin d'un répertoire
 Remplis la liste avec les entités trouvés dans le chemin
 */
 void listerFichiers(listeFichiers* liste,char* chemin) {
