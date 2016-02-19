@@ -65,7 +65,7 @@ int main(int argc, char** argv) {
 
 
 /*
-Demande une liste vide et le chemin d'un répertoire
+Demande une liste vide et le chemin d'un répertoire lol
 Remplis la liste avec les entités trouvés dans le chemin
 */
 void listerFichiers(listeFichiers* liste,char* chemin) {
