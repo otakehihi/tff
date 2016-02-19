@@ -24,8 +24,9 @@ Liste dynamique pour un répertoire
 fichiers : pointeur vers un tableau d'entités de repertoire
 chemin : string du chemin du repertoire
 capacité : nombre d'entités contenu dans le repertoire
- * test jordan lol
 */
+
+
 struct listeFichiers {
     dirent** fichiers;
     char* chemin;
@@ -48,6 +49,8 @@ char* concatChar(char*,char);
 void findChaineFic(char*,char*);
 void findChaineRep(char*,char*);
 void findChaineRepRecursif(char*, char*);
+void findChaineFicname(char*, char*);
+void findChaineFicnameRecursif(char*, char*);
 
 
 int main(int argc, char** argv) {
@@ -57,7 +60,7 @@ int main(int argc, char** argv) {
     listerFichiers(liste,chemin);
     affListeFichiers(liste);*/
 
-    findChaineRep("C:/Users/Jo/Desktop/","je");
+    findChaineFicnameRecursif("C:/Users/Jo/Desktop/",".txt");
 
     //freeListe(liste);
     return 0;
@@ -302,6 +305,45 @@ void findChaineRepRecursif(char* chemin, char* chaine) {
         }
         else if(liste->fichiers[i]->d_type==16){
             findChaineRepRecursif(concatDoss(liste->chemin,liste->fichiers[i]->d_name),chaine);
+        }
+    }
+    freeListe(liste);
+}
+
+void findChaineFicname(char* chemin, char* chaine) {
+    listeFichiers* liste = newListeFichiers();
+    listerFichiers(liste,chemin);
+    int i;
+    char* chemin2;
+    char* nom;
+    char* conc;
+    for(i=0;i<liste->capacite;i++) {
+        if(liste->fichiers[i]->d_type==0) {
+            if (strstr(liste->fichiers[i]->d_name,chaine)!=NULL) {
+                printf("%s\n",concat(liste->chemin,liste->fichiers[i]->d_name));
+            }
+        }
+    }
+    freeListe(liste);
+}
+
+void findChaineFicnameRecursif(char* chemin, char* chaine) {
+    listeFichiers* liste = newListeFichiers();
+    listerFichiers(liste,chemin);
+    int i;
+    char* chemin2;
+    char* nom;
+    char* conc;
+    for(i=0;i<liste->capacite;i++) {
+        if(liste->fichiers[i]->d_type==0) {
+            if (strstr(liste->fichiers[i]->d_name,chaine)!=NULL) {
+                printf("%s\n",concat(liste->chemin,liste->fichiers[i]->d_name));
+            }
+        }
+        else if (liste->fichiers[i]->d_type==16) {
+            char* res = concatDoss(liste->chemin,liste->fichiers[i]->d_name);
+            findChaineFicnameRecursif(res,chaine);
+            free(res);
         }
     }
     freeListe(liste);
