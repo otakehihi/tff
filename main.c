@@ -24,6 +24,7 @@ Liste dynamique pour un répertoire
 fichiers : pointeur vers un tableau d'entités de repertoire
 chemin : string du chemin du repertoire
 capacité : nombre d'entités contenu dans le repertoire
+ * test
 */
 struct listeFichiers {
     dirent** fichiers;
