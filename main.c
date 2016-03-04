@@ -116,8 +116,8 @@ void ajouteFichier(listeFichiers* liste, dirent* fichier) {
 }
 
 /*
-Demande une liste
-Affiche la liste
+Demande un répertoire
+Affiche la liste des entités
 */
 void affListeFichiers(listeFichiers* liste) {
     int i;
@@ -153,7 +153,7 @@ void freeListe(listeFichiers* liste) {
 }
 
 /*
-Demande une liste
+Demande un répertoire
 Affiche toutes les entités recursivement
 */
 void affListeFichiersRecursif(listeFichiers* liste) {
@@ -310,6 +310,10 @@ void findChaineRepRecursif(char* chemin, char* chaine) {
     freeListe(liste);
 }
 
+/*
+ Demande le chemin vers un répertoire et une chaine
+ * Affiche la liste des fichiers ayant cette chaine dans leur nom
+ */
 void findChaineFicname(char* chemin, char* chaine) {
     listeFichiers* liste = newListeFichiers();
     listerFichiers(liste,chemin);
@@ -327,6 +331,10 @@ void findChaineFicname(char* chemin, char* chaine) {
     freeListe(liste);
 }
 
+/*
+ Demande le chemin vers un répertoire et une chaine
+ * Affiche recursivement la liste des fichiers ayant cette chaine dans leur nom
+ */
 void findChaineFicnameRecursif(char* chemin, char* chaine) {
     listeFichiers* liste = newListeFichiers();
     listerFichiers(liste,chemin);
