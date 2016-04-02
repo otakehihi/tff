@@ -54,15 +54,7 @@ void findChaineFicnameRecursif(char*, char*);
 
 
 int main(int argc, char** argv) {
-    char* chemin;
-    chemin="C:/Users/Jo/Desktop/";
-    /*listeFichiers* liste = newListeFichiers();
-    listerFichiers(liste,chemin);
-    affListeFichiers(liste);*/
-
-    findChaineFicnameRecursif("C:/Users/Jo/Desktop/",".txt");
-
-    //freeListe(liste);
+    findChaineFicnameRecursif("C:/Users/Jo/Desktop/","test");
     return 0;
 }
 
@@ -74,14 +66,10 @@ Remplis la liste avec les entités trouvés dans le chemin
 void listerFichiers(listeFichiers* liste,char* chemin) {
     liste->chemin=malloc(sizeof(char)*strlen(chemin));
     liste->chemin=chemin;
-
     DIR* rep = NULL;
-
-
     rep = opendir(liste->chemin);
     seekdir(rep,2);
     dirent* fichierLu=readdir(rep);
-
     while (fichierLu != NULL)
     {
         ajouteFichier(liste,fichierLu);
@@ -97,7 +85,6 @@ listeFichiers* newListeFichiers() {
     liste->capacite=0;
     liste->curseur=0;
     liste->fichiers=malloc(sizeof(dirent*));
-
     return liste;
 }
 
@@ -109,8 +96,6 @@ void ajouteFichier(listeFichiers* liste, dirent* fichier) {
     liste->capacite=liste->capacite+1;
     liste->fichiers=realloc(liste->fichiers,sizeof(dirent*)*(liste->capacite));
     liste->fichiers[liste->curseur]=malloc(sizeof(dirent));
-
-
     *liste->fichiers[liste->curseur]=*fichier;
     liste->curseur=liste->curseur+1;
 }
@@ -201,7 +186,7 @@ char* concat(char* a,char* b) {
     return res;
 }
 
-/*
+/*s
 Demande une chaine et un caractère
 Concatène le caractère à la chaine et renvoie la nouvelle chaine
 */
@@ -275,7 +260,6 @@ void findChaineRep(char* chemin, char* chaine) {
             chemin2 = liste->chemin;
             nom = liste->fichiers[i]->d_name;
             conc = concat(chemin,nom);
-            //printf("%s\n",conc);
             findChaineFic(conc,chaine);
             free(conc);
         }
@@ -299,7 +283,6 @@ void findChaineRepRecursif(char* chemin, char* chaine) {
             chemin2 = liste->chemin;
             nom = liste->fichiers[i]->d_name;
             conc = concat(chemin,nom);
-            //printf("%s\n",conc);
             findChaineFic(conc,chaine);
             free(conc);
         }
@@ -318,9 +301,6 @@ void findChaineFicname(char* chemin, char* chaine) {
     listeFichiers* liste = newListeFichiers();
     listerFichiers(liste,chemin);
     int i;
-    char* chemin2;
-    char* nom;
-    char* conc;
     for(i=0;i<liste->capacite;i++) {
         if(liste->fichiers[i]->d_type==0) {
             if (strstr(liste->fichiers[i]->d_name,chaine)!=NULL) {
@@ -339,9 +319,6 @@ void findChaineFicnameRecursif(char* chemin, char* chaine) {
     listeFichiers* liste = newListeFichiers();
     listerFichiers(liste,chemin);
     int i;
-    char* chemin2;
-    char* nom;
-    char* conc;
     for(i=0;i<liste->capacite;i++) {
         if(liste->fichiers[i]->d_type==0) {
             if (strstr(liste->fichiers[i]->d_name,chaine)!=NULL) {
